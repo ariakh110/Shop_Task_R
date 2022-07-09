@@ -6,7 +6,12 @@ const server = axios.create({
 
 //get all products asynchronously
 const getAllProducts = async () => {
-  const { data } = await server.get("/");
+  const data = await server
+    .get("/")
+    .then((res) => res.data)
+    .catch((err) => {
+      throw err;
+    });
   return data;
 };
 
