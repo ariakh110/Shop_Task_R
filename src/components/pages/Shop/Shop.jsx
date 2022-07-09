@@ -22,8 +22,8 @@ const Shop = () => {
   );
   //************************* navigate *************************** */
   const navigate = useNavigate();
-  const handleOnClickShopItem = (id) => {
-    navigate(`/single-Product/${id}`);
+  const handleOnClickShopItem = (id, item) => {
+    navigate(`/single-Product/${id}`, { state: item });
   };
   //************************* render *************************** */
   if (isLoading)

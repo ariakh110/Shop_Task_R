@@ -28,7 +28,7 @@ const ShopItem = ({ props, handleOnClickShopItem }) => {
         <Button
           variant="outlined"
           startIcon={<ShoppingCartOutlinedIcon />}
-          onClick={() => handleOnClickShopItem(id)}
+          onClick={() => handleOnClickShopItem(id, props)}
         >
           view
         </Button>
