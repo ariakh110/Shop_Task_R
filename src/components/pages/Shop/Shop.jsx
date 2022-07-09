@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useQuery } from "react-query";
 import _ from "lodash";
 
@@ -12,18 +12,20 @@ import { Box, CircularProgress, Drawer, Grid } from "@mui/material";
 import * as api from "../../../api/api";
 
 //style
-import { Wrapper, StyledButton } from "./Shop.styles";
+import { Wrapper } from "./Shop.styles";
 
 const Shop = () => {
+  //************************* fetch data *************************** */
   const { data: products, isLoading, error } = useQuery(
     "products",
     api.getAllProducts
   );
-
+  //************************* navigate *************************** */
+  const navigate = useNavigate();
   const handleOnClickShopItem = (id) => {
-    console.log(id);
+    navigate(`/single-Product/${id}`);
   };
-
+  //************************* render *************************** */
   if (isLoading)
     return (
       <>
@@ -50,8 +52,11 @@ const Shop = () => {
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
               {_.map(products, (product) => (
-                <Grid item key={product.id} xs={12} sm={4}>
-                  <ShopItem item={product} handleOnClickShopItem />
+                <Grid item key={product.id} xs={12} sm={3}>
+                  <ShopItem
+                    props={product}
+                    handleOnClickShopItem={handleOnClickShopItem}
+                  />
                 </Grid>
               ))}
             </Grid>

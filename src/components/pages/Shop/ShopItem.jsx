@@ -1,37 +1,38 @@
 import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+/******************************MUI**************************** */
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea, CardActions } from "@mui/material";
+import { Button, Divider } from "@mui/material";
+import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Rating from "@mui/material/Rating";
 
-const ShopItem = ({ props }) => {
-  const { image, price, description } = props;
+//style
+import { Wrapper } from "./ShopItem.styles";
+
+const ShopItem = ({ props, handleOnClickShopItem }) => {
+  const { id, image, price, description, title, rating } = props;
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardActionArea>
-          <CardMedia
-            component="img"
-            height="140"
-            image={image}
-            alt="green iguana"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard / {price}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {description}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
-            Buy
-          </Button>
-        </CardActions>
-      </Card>
+      <Wrapper>
+        <img src={image} alt={title} />
+        <div>
+          <h3>{title}</h3>
+          <p>{description}</p>
+          <h3>${price}</h3>
+          <Typography component="legend">
+            <CommentOutlinedIcon /> / {rating.count}
+          </Typography>
+          <Rating name="rating" value={rating.rate} />
+        </div>
+        <Divider />
+        <Button
+          variant="outlined"
+          startIcon={<ShoppingCartOutlinedIcon />}
+          onClick={() => handleOnClickShopItem(id)}
+        >
+          view
+        </Button>
+      </Wrapper>
     </>
   );
 };

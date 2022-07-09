@@ -16,9 +16,8 @@ function App() {
       <Head></Head>
       <Routes location={location} key={location.pathname}>
         <Route path="/Home" element={<Navigate replace to="/" />} />
-        <Route path="/shop" element={<Shop />}>
-          <Route path="/shop/:productId" element={<SingleProduct />} />
-        </Route>
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/single-Product/:id" element={<SingleProduct />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </>
